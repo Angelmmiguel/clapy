@@ -1,0 +1,28 @@
+{
+  "name": "clapy",
+  "version": "0.0.1",
+  "description": "A fun microservice to emulate the Clap feature in your sites",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Angelmmiguel/clapy.git"
+  },
+  "keywords": [
+    "microservice",
+    "blog",
+    "blogging",
+    "articles",
+    "likes",
+    "favs",
+    "claps"
+  ],
+  "author": "Angel M Miguel <angel@laux.es>",
+  "license": "Apache-2.0",
+  "bugs": {
+    "url": "https://github.com/Angelmmiguel/clapy/issues"
+  },
+  "homepage": "https://github.com/Angelmmiguel/clapy#readme"
+}

@@ -4,6 +4,8 @@
   "description": "A fun microservice to emulate the Clap feature in your sites",
   "main": "index.js",
   "scripts": {
+    "build": "webpack -p --progress --colors",
+    "dev": "webpack --progress --colors --watch",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
@@ -24,5 +26,8 @@
   "bugs": {
     "url": "https://github.com/Angelmmiguel/clapy/issues"
   },
-  "homepage": "https://github.com/Angelmmiguel/clapy#readme"
+  "homepage": "https://github.com/Angelmmiguel/clapy#readme",
+  "devDependencies": {
+    "webpack": "^3.5.5"
+  }
 }

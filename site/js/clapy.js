@@ -67,7 +67,18 @@
 /* 0 */
 /***/ (function(module, exports) {
 
-console.log('test');
+/**
+ * Clapy library!
+ */
+const clapy = (options = {}) => {
+  // Initialize all required values
+  let selector = options.selector ||
+
+  // Private methods!
+  function initializeValue(options, property, value, expected) {
+
+  }
+}
 
 
 /***/ })

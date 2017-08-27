@@ -6,6 +6,8 @@
   "scripts": {
     "build": "webpack -p --progress --colors",
     "dev": "webpack --progress --colors --watch",
+    "site-build": "gulp compile",
+    "site-dev": "gulp",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
@@ -28,6 +30,12 @@
   },
   "homepage": "https://github.com/Angelmmiguel/clapy#readme",
   "devDependencies": {
-    "webpack": "^3.5.5"
+    "gulp": "^3.9.1",
+    "gulp-copy": "^1.0.1",
+    "webpack": "^3.5.5",
+    "gulp-run": "^1.7.1"
+  },
+  "dependencies": {
+    "harp": "^0.24.0"
   }
 }

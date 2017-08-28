@@ -65,21 +65,100 @@
 /************************************************************************/
 /******/ ([
 /* 0 */
-/***/ (function(module, exports) {
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
 
 /**
  * Clapy library!
  */
-const clapy = (options = {}) => {
+var clapy = function clapy() {
+  var options = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {};
+
   // Initialize all required values
-  let selector = options.selector ||
+  var selector = initValue(options, 'selector', '.clapy', 'string');
+  var api = initValue(options, 'api', 'https://clapy-dev.now.sh/', 'string');
 
-  // Private methods!
-  function initializeValue(options, property, value, expected) {
+  // Current count for the clapy elements
+  var counts = {};
 
+  // Current path
+  var currentUrl = window.location.href.split('?')[0];
+
+  // Clapy elements in the site
+  var els = document.querySelectorAll(selector);
+
+  // Iterate over all the elements to initialize them
+  els.forEach(function (el) {
+    var url = initValue(el.dataset, 'clapyUrl', currentUrl, 'string');
+    // Init the HTML elements
+    initElement(el);
+    // Initiate fetch :)
+    fetchData(url);
+  });
+
+  /**
+   * Initialize the given value. This method will try to get the property from the
+   * options object. If it's present, it will check the expected type and return it
+   * or return the default value
+   */
+  function initValue(options, property, defaultValue, expected) {
+    var current = options[property];
+    return current && (typeof current === 'undefined' ? 'undefined' : _typeof(current)) === expected ? current : defaultValue;
   }
-}
 
+  /**
+   * Initialize the HTML code of the element
+   */
+  function initElement(el) {
+    var button = document.createElement('button');
+    button.classList.add('clapy__button');
+    var counter = document.createElement('div');
+    counter.classList.add('clapy__counter');
+    el.appendChild(button);
+    el.appendChild(counter);
+  }
+
+  /**
+   * Update the elements in the page with the new data from the API
+   */
+  function updateElements() {
+    els.forEach(function (el) {
+      var url = initValue(el.dataset, 'clapyUrl', currentUrl, 'string');
+    });
+  }
+
+  /**
+   * Fetch the data from the server for the given url. It receives a callback that will
+   * be executed with the result.
+   */
+  function fetchData(url) {
+    if (counts[url] && counts[url].fetching) {
+      // The data is being fetch for that URL
+      return;
+    }
+
+    // Store the data in the counts
+    counts[url] = counts[url] || { count: 0, fetching: false };
+    counts[url].fetching = true;
+
+    fetch('' + api + url).then(function (response) {
+      return response.json();
+    }).then(function (json) {
+      // Update the object and the UI
+      console.log(json);
+      counts[url].count = json.count;
+      counts[url].fetching = false;
+      updateElements();
+    }).catch(function (err) {
+      // Error :(
+      console.log(err);
+    });
+  }
+};
 
 /***/ })
 /******/ ]);

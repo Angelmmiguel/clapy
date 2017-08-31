@@ -1,0 +1,54 @@
+// Size:
+$buttonSize: 4rem;
+$color: #0dd053;
+$light-color: #89f5b0;
+
+.clapy {
+
+  &__button {
+    // Sizing and positioning
+    width: $buttonSize;
+    height: $buttonSize;
+    // Appareance
+    background-color: white;
+    border: 1px solid $light-color;
+    color: $color;
+    border-radius: 50%;
+    box-shadow: 1px 1px 4px rgba(0, 0, 0, 0.15);
+    cursor: pointer;
+    // Icon
+    background-image: url('./icons/hat.svg');
+    background-position: 50% 50%;
+    background-size: ($buttonSize / 2) ($buttonSize / 2);
+    background-repeat: no-repeat;
+    // Animations
+    transition: .3s transform ease-in-out, .3s box-shadow ease-in-out;
+    will-change: transform;
+
+    svg {
+      path {
+        fill: currentColor;
+      }
+    }
+
+    &:hover {
+      box-shadow: 1px 3px 4px rgba(0, 0, 0, 0.15);
+      transform: translateY(-3px);
+    }
+
+    &:active {
+      box-shadow: 1px 2px 4px rgba(0, 0, 0, 0.15);
+      transform: translateY(-1px);
+    }
+
+    &:focus {
+      outline: none;
+    }
+  }
+
+  &__counter {
+    margin-top: .5em;
+    color: $color;
+    font-family: system-os, Helvetica, Arial, sans-serif;
+  }
+}

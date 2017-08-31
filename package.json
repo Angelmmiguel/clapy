@@ -33,12 +33,15 @@
     "babel-core": "^6.26.0",
     "babel-loader": "^7.1.2",
     "babel-preset-env": "^1.6.0",
+    "css-loader": "^0.28.7",
+    "extract-text-webpack-plugin": "^3.0.0",
     "gulp": "^3.9.1",
     "gulp-copy": "^1.0.1",
     "gulp-run": "^1.7.1",
+    "harp": "^0.24.0",
+    "node-sass": "^4.5.3",
+    "sass-loader": "^6.0.6",
+    "svg-url-loader": "^2.1.1",
     "webpack": "^3.5.5"
-  },
-  "dependencies": {
-    "harp": "^0.24.0"
   }
 }

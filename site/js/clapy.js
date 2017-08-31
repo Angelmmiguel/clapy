@@ -1,3 +1,4 @@
+window["Clapy"] =
 /******/ (function(modules) { // webpackBootstrap
 /******/ 	// The module cache
 /******/ 	var installedModules = {};
@@ -70,12 +71,15 @@
 "use strict";
 
 
-var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
+var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; // Import styles!
+
+
+__webpack_require__(1);
 
 /**
  * Clapy library!
  */
-var clapy = function clapy() {
+var Clapy = function Clapy() {
   var options = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {};
 
   // Initialize all required values
@@ -96,6 +100,8 @@ var clapy = function clapy() {
     var url = initValue(el.dataset, 'clapyUrl', currentUrl, 'string');
     // Init the HTML elements
     initElement(el);
+    // Load listeners
+    addListeners(el);
     // Initiate fetch :)
     fetchData(url);
   });
@@ -118,17 +124,48 @@ var clapy = function clapy() {
     button.classList.add('clapy__button');
     var counter = document.createElement('div');
     counter.classList.add('clapy__counter');
+    counter.appendChild(document.createTextNode('-'));
     el.appendChild(button);
     el.appendChild(counter);
   }
 
   /**
+   * Create the listeners
+   */
+  function addListeners(el) {
+    el.querySelector('.clapy__button').addEventListener('click', onClap);
+  }
+
+  /**
+   * Clean the listeners
+   */
+  function cleanListeners() {
+    els.forEach(function (el) {
+      el.querySelector('.clapy__button').removeEventListener('click', onClap);
+    });
+  }
+
+  /**
    * Update the elements in the page with the new data from the API
    */
-  function updateElements() {
+  function updateElements(url) {
     els.forEach(function (el) {
-      var url = initValue(el.dataset, 'clapyUrl', currentUrl, 'string');
+      var elUrl = initValue(el.dataset, 'clapyUrl', currentUrl, 'string');
+      if (url === elUrl) {
+        el.querySelector('.clapy__counter').innerHTML = counts[url].count;
+      }
     });
+  }
+
+  /**
+   * Send the query to the server
+   */
+  function onClap(e) {
+    // Prevent other behaviours
+    e.preventDefault();
+    var el = e.target.parentNode;
+    var url = initValue(el.dataset, 'clapyUrl', currentUrl, 'string');
+    console.log(url + ' +1');
   }
 
   /**
@@ -149,16 +186,24 @@ var clapy = function clapy() {
       return response.json();
     }).then(function (json) {
       // Update the object and the UI
-      console.log(json);
       counts[url].count = json.count;
       counts[url].fetching = false;
-      updateElements();
+      updateElements(url);
     }).catch(function (err) {
       // Error :(
       console.log(err);
     });
   }
 };
+
+// Export the function
+module.exports = Clapy;
+
+/***/ }),
+/* 1 */
+/***/ (function(module, exports) {
+
+// removed by extract-text-webpack-plugin
 
 /***/ })
 /******/ ]);

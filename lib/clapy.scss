@@ -1,9 +1,12 @@
 // Size:
 $buttonSize: 4rem;
-$color: #0dd053;
-$light-color: #89f5b0;
+$clapSize: 1.5rem;
+$clapMargin: -($clapSize / 2);
+$green: #0dd053;
+$light-green: #89f5b0;
 
 .clapy {
+  position: relative;
 
   &__button {
     // Sizing and positioning
@@ -11,8 +14,8 @@ $light-color: #89f5b0;
     height: $buttonSize;
     // Appareance
     background-color: white;
-    border: 1px solid $light-color;
-    color: $color;
+    border: 1px solid $light-green;
+    color: $green;
     border-radius: 50%;
     box-shadow: 1px 1px 4px rgba(0, 0, 0, 0.15);
     cursor: pointer;
@@ -48,7 +51,63 @@ $light-color: #89f5b0;
 
   &__counter {
     margin-top: .5em;
-    color: $color;
+    color: $green;
     font-family: system-os, Helvetica, Arial, sans-serif;
+
+    &.fadeIn {
+      animation: fadeIn .3s ease-out forwards;
+    }
+  }
+
+  &.clapy--clapping {
+    .clapy__counter {
+      opacity: 0;
+    }
+  }
+
+  &__clap {
+    // Positioning
+    position: absolute;
+    z-index: -1;
+    width: $clapSize;
+    height: $clapSize;
+    top: 50%;
+    left: 50%;
+    margin: $clapMargin 0 0 $clapMargin;
+    border-radius: 50%;
+    // Appearance
+    background-color: $green;
+    font-size: .75em;
+    line-height: $clapSize;
+    color: white;
+    opacity: .7;
+    // Animation
+    will-change: transform;
+    animation: slideDown .5s ease-out forwards;
+  }
+}
+
+// Animation
+@keyframes slideDown {
+  0% {
+    transform: translateY(0%);
+  }
+  70%{
+    transform: translateY(150%);
+  }
+  80%{
+    transform: translateY(140%);
+  }
+  100% {
+    transform: translateY(150%);
+  }
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
   }
 }

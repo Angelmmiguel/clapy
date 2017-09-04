@@ -95,6 +95,9 @@ var Clapy = function Clapy() {
   // Clapy elements in the site
   var els = document.querySelectorAll(selector);
 
+  // Clapy timeout
+  var clapyTimeout = undefined;
+
   // Iterate over all the elements to initialize them
   els.forEach(function (el) {
     var url = initValue(el.dataset, 'clapyUrl', currentUrl, 'string');
@@ -166,6 +169,17 @@ var Clapy = function Clapy() {
     var el = e.target.parentNode;
     var url = initValue(el.dataset, 'clapyUrl', currentUrl, 'string');
 
+    // Clap node
+    var clap = document.createElement('div');
+    clap.classList.add('clapy__clap');
+    clap.appendChild(document.createTextNode('+1'));
+    el.querySelector('.clapy__counter').classList.remove('fadeIn');
+    el.appendChild(clap);
+
+    // Add clapping class
+    el.classList.add('clapy--clapping');
+    clearClapyTimeout(el);
+
     // Optimistic update ;)
     counts[url].count = counts[url].count + 1;
     updateElements(url);
@@ -182,6 +196,22 @@ var Clapy = function Clapy() {
       // Error :(
       console.log(err);
     });
+  }
+
+  /**
+   * Remove the clapy class and elements!
+   */
+  function clearClapyTimeout(el) {
+    // Clear previous timeouts
+    clearTimeout(clapyTimeout);
+
+    clapyTimeout = setTimeout(function () {
+      el.querySelectorAll('.clapy__clap').forEach(function (clap) {
+        clap.remove();
+      });
+      el.querySelector('.clapy__counter').classList.add('fadeIn');
+      el.classList.remove('clapy--clapping');
+    }, 1000);
   }
 
   /**
